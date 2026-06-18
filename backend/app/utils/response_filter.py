@@ -90,13 +90,22 @@ def _parse_price_ranges(raw: List[Dict]) -> List[PriceRange]:
     return result
 
 
+def _clean_name(name: Optional[str]) -> Optional[str]:
+    """Return None for blank, 'Undefined', or 'undefined' Ticketmaster placeholder values."""
+    if not name:
+        return None
+    if name.strip().lower() in ("undefined", "n/a", "unknown", ""):
+        return None
+    return name.strip()
+
+
 def _parse_category(classifications: List[Dict]) -> tuple[Optional[str], Optional[str]]:
     if not classifications:
         return None, None
     cls = classifications[0]
     segment = cls.get("segment", {})
     genre = cls.get("genre", {})
-    return segment.get("name"), genre.get("name")
+    return _clean_name(segment.get("name")), _clean_name(genre.get("name"))
 
 
 def parse_event(raw: Dict) -> Optional[Event]:

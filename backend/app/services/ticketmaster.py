@@ -55,7 +55,7 @@ class TicketmasterClient:
         if self._client is None or self._client.is_closed:
             self._client = httpx.AsyncClient(
                 base_url=self._settings.ticketmaster_base_url,
-                timeout=httpx.Timeout(10.0, connect=5.0),
+                timeout=httpx.Timeout(30.0, connect=15.0),
                 headers={"Accept": "application/json"},
                 follow_redirects=True,
             )
@@ -182,7 +182,7 @@ class TicketmasterClient:
         return TICKETMASTER_SEGMENTS
 
 
-# ── Custom Exceptions ─────────────────────────────────────────────────────────
+# Custom Exceptions
 
 
 class TicketmasterAPIError(Exception):
@@ -201,7 +201,7 @@ class TicketmasterTimeoutError(TicketmasterAPIError):
     """Raised when request times out."""
 
 
-# ── Module-level singleton ────────────────────────────────────────────────────
+# Module-level singleton
 
 _client_instance: Optional[TicketmasterClient] = None
 

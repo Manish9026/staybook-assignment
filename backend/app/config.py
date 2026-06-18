@@ -17,25 +17,25 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    # ── Ticketmaster ─────────────────────────────────────────────
+    # Ticketmaster Settings
     ticketmaster_api_key: str = ""
     ticketmaster_base_url: str = "https://app.ticketmaster.com/discovery/v2"
 
-    # ── Cache ─────────────────────────────────────────────────────
+    # Cache Settings
     cache_ttl_seconds: int = 60
     cache_max_size: int = 500
 
-    # ── Rate Limiting ─────────────────────────────────────────────
+    # Rate Limiting Settings
     rate_limit_per_minute: int = 60
 
-    # ── CORS ──────────────────────────────────────────────────────
+    # CORS Settings
     allowed_origins: str = "http://localhost:3000,http://127.0.0.1:3000"
 
-    # ── Response Security ─────────────────────────────────────────
+    # Response Security Settings
     expose_raw_response: bool = False
     strip_internal_fields: bool = True
 
-    # ── App ───────────────────────────────────────────────────────
+    # App Settings
     app_env: str = "development"
     app_debug: bool = False
     app_host: str = "0.0.0.0"

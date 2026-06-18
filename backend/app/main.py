@@ -45,7 +45,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# ── Middleware (order matters: added last = runs first) ───────────────────────
+# Middleware (order matters: added last = runs first)
 
 # GZip compression for all responses > 1KB
 app.add_middleware(GZipMiddleware, minimum_size=1024)
@@ -63,7 +63,7 @@ app.add_middleware(
 # Token-bucket rate limiting per IP
 app.add_middleware(RateLimitMiddleware, rate_limit_per_minute=settings.rate_limit_per_minute)
 
-# ── Routers ────────────────────────────────────────────────────────────────────
+# Routers
 
 app.include_router(health.router, prefix="/api")
 app.include_router(events.router, prefix="/api")
